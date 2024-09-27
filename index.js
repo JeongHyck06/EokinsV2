@@ -1,8 +1,8 @@
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-
 const dotenv = require('dotenv');
+const connectDB = require('./database'); // MongoDB 연결 함수
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
@@ -56,8 +56,17 @@ client.on('guildCreate', async (guild) => {
     }
 });
 
+// 봇이 준비된 후 MongoDB 연결 시도
 client.once(Events.ClientReady, async (c) => {
     console.log(`Logged in as ${c.user.tag}`);
+
+    // MongoDB 연결 시도
+    try {
+        const db = await connectDB();
+        console.log('Discord 봇이 준비된 후 MongoDB에 연결되었습니다.');
+    } catch (error) {
+        console.error('MongoDB 연결 실패:', error);
+    }
 
     const guilds = client.guilds.cache.map((guild) => guild.id);
 
@@ -78,7 +87,6 @@ client.once(Events.ClientReady, async (c) => {
     });
 });
 
-// 명령어 처리 부분
 client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
