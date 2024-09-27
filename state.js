@@ -4,6 +4,20 @@ let positions = {
     bot: [],
     support: [],
     jungle: [],
+    team1: {
+        top: '빈 자리',
+        mid: '빈 자리',
+        bot: '빈 자리',
+        support: '빈 자리',
+        jungle: '빈 자리',
+    },
+    team2: {
+        top: '빈 자리',
+        mid: '빈 자리',
+        bot: '빈 자리',
+        support: '빈 자리',
+        jungle: '빈 자리',
+    },
 };
 
 let positionLocks = {
@@ -18,17 +32,8 @@ let gameStatus = {
     gameSessionActive: false,
 };
 
-let emojiMap = {
-    top: null,
-    mid: null,
-    support: null,
-    jungle: null,
-    ad: null,
-};
-
 module.exports = {
     positions,
     positionLocks,
-    emojiMap,
     gameStatus,
 };

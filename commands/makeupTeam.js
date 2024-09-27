@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { positions } = require('../state');
+const { positions } = require('../state'); // positions 객체를 불러옴
 
 module.exports = {
     data: new SlashCommandBuilder().setName('팀섞기').setDescription('포지션별로 랜덤하게 팀을 나눕니다.'),
@@ -12,16 +12,20 @@ module.exports = {
             return;
         }
 
-        const team1 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
-        const team2 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
+        // team1, team2를 positions 객체에서 가져와 사용
+        positions.team1 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
+        positions.team2 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
 
         Object.keys(positions).forEach((role) => {
-            const players = positions[role];
-            if (players.length > 0) {
-                const shuffled = players.sort(() => Math.random() - 0.5);
+            if (role !== 'team1' && role !== 'team2') {
+                // 팀1, 팀2를 제외한 역할 포지션만 순회
+                const players = positions[role];
+                if (players.length > 0) {
+                    const shuffled = players.sort(() => Math.random() - 0.5);
 
-                if (shuffled[0]) team1[role] = shuffled[0];
-                if (shuffled[1]) team2[role] = shuffled[1];
+                    if (shuffled[0]) positions.team1[role] = shuffled[0];
+                    if (shuffled[1]) positions.team2[role] = shuffled[1];
+                }
             }
         });
 
@@ -35,12 +39,12 @@ module.exports = {
         const team1Embed = new EmbedBuilder()
             .setColor(0x1abc9c)
             .setTitle('1팀')
-            .addFields({ name: `${topEmoji} 탑`, value: `${team1.top}`, inline: false }, { name: `${jungleEmoji} 정글`, value: `${team1.jungle}`, inline: false }, { name: `${midEmoji} 미드`, value: `${team1.mid}`, inline: false }, { name: `${botEmoji} 원딜`, value: `${team1.bot}`, inline: false }, { name: `${supportEmoji} 서폿`, value: `${team1.support}`, inline: false });
+            .addFields({ name: `${topEmoji} 탑`, value: `${positions.team1.top}`, inline: false }, { name: `${jungleEmoji} 정글`, value: `${positions.team1.jungle}`, inline: false }, { name: `${midEmoji} 미드`, value: `${positions.team1.mid}`, inline: false }, { name: `${botEmoji} 원딜`, value: `${positions.team1.bot}`, inline: false }, { name: `${supportEmoji} 서폿`, value: `${positions.team1.support}`, inline: false });
 
         const team2Embed = new EmbedBuilder()
             .setColor(0xe74c3c)
             .setTitle('2팀')
-            .addFields({ name: `${topEmoji} 탑`, value: `${team2.top}`, inline: false }, { name: `${jungleEmoji} 정글`, value: `${team2.jungle}`, inline: false }, { name: `${midEmoji} 미드`, value: `${team2.mid}`, inline: false }, { name: `${botEmoji} 원딜`, value: `${team2.bot}`, inline: false }, { name: `${supportEmoji} 서폿`, value: `${team2.support}`, inline: false });
+            .addFields({ name: `${topEmoji} 탑`, value: `${positions.team2.top}`, inline: false }, { name: `${jungleEmoji} 정글`, value: `${positions.team2.jungle}`, inline: false }, { name: `${midEmoji} 미드`, value: `${positions.team2.mid}`, inline: false }, { name: `${botEmoji} 원딜`, value: `${positions.team2.bot}`, inline: false }, { name: `${supportEmoji} 서폿`, value: `${positions.team2.support}`, inline: false });
 
         await interaction.reply({
             content: '팀이 랜덤으로 섞였습니다',

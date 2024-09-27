@@ -24,7 +24,7 @@ module.exports = {
 
         const collector = interaction.channel.createMessageComponentCollector({
             componentType: ComponentType.Button,
-            time: 60000,
+            time: 300000,
         });
 
         collector.on('collect', async (i) => {
@@ -39,9 +39,12 @@ module.exports = {
             positionLocks[position] = true;
 
             Object.keys(positions).forEach((role) => {
-                const index = positions[role].indexOf(nickname);
-                if (index > -1) {
-                    positions[role].splice(index, 1);
+                // team1, team2는 포지션이 아니므로 제외
+                if (role !== 'team1' && role !== 'team2') {
+                    const index = positions[role].indexOf(nickname);
+                    if (index > -1) {
+                        positions[role].splice(index, 1);
+                    }
                 }
             });
 
@@ -67,8 +70,6 @@ module.exports = {
             await interaction.followUp({
                 embeds: [embed],
             });
-
-            gameStatus.gameSessionActive = false;
         });
     },
 };

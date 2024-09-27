@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { positions } = require('../state');
+const { positions, gameStatus } = require('../state');
 
 module.exports = {
     data: new SlashCommandBuilder().setName('초기화').setDescription('참여자 포지션을 모두 초기화합니다.'),
@@ -8,6 +8,7 @@ module.exports = {
         Object.keys(positions).forEach((role) => {
             positions[role] = [];
         });
+        gameStatus.gameSessionActive = false;
 
         const nickname = interaction.member.nickname || interaction.user.username;
 
