@@ -20,6 +20,17 @@ let positions = {
     },
 };
 
+let teams = {
+    team1: {
+        captain: null,
+        players: [],
+    },
+    team2: {
+        captain: null,
+        players: [],
+    },
+};
+
 let positionLocks = {
     top: false,
     mid: false,
@@ -30,10 +41,20 @@ let positionLocks = {
 
 let gameStatus = {
     gameSessionActive: false,
+    gameLock: false,
+    currentPicker: null,
+};
+
+let rpsResult = {
+    team1Move: null,
+    team2Move: null,
+    winner: null, // 가위바위보의 승자를 저장
 };
 
 module.exports = {
     positions,
     positionLocks,
     gameStatus,
+    teams,
+    rpsResult,
 };
