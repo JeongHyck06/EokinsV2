@@ -5,6 +5,10 @@ module.exports = {
     data: new SlashCommandBuilder().setName('팀섞기').setDescription('포지션별로 랜덤하게 팀을 나눕니다.'),
 
     async execute(interaction) {
+        if (gameStatus.gameLock) {
+            await interaction.reply({ content: '현재 팀 섞기 기능을 사용할 수 없습니다. 주장 등록 중입니다.', ephemeral: true });
+            return;
+        }
         const isEmpty = Object.values(positions).every((pos) => pos.length === 0);
 
         if (isEmpty) {
