@@ -4,8 +4,6 @@ dotenv.config();
 const { MongoClient } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
-console.log('MongoDB URI:', uri); // URI 출력
-
 async function connectDB() {
     if (!uri) {
         throw new Error('MongoDB URI가 설정되지 않았습니다.');
