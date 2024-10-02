@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { positions } = require('../state'); // positions 객체를 불러옴
+const { positions, gameStatus } = require('../state'); // positions 객체를 불러옴
 
 module.exports = {
     data: new SlashCommandBuilder().setName('팀섞기').setDescription('포지션별로 랜덤하게 팀을 나눕니다.'),
