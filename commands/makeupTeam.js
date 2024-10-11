@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { positions, gameStatus } = require('../state'); // positions 객체를 불러옴
+const { positions, gameStatus } = require('../state');
 
 module.exports = {
     data: new SlashCommandBuilder().setName('팀섞기').setDescription('포지션별로 랜덤하게 팀을 나눕니다.'),
@@ -16,13 +16,11 @@ module.exports = {
             return;
         }
 
-        // team1, team2를 positions 객체에서 가져와 사용
         positions.team1 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
         positions.team2 = { top: '빈 자리', mid: '빈 자리', bot: '빈 자리', support: '빈 자리', jungle: '빈 자리' };
-
+        gameStatus.teamCreationMethod = 'random';
         Object.keys(positions).forEach((role) => {
             if (role !== 'team1' && role !== 'team2') {
-                // 팀1, 팀2를 제외한 역할 포지션만 순회
                 const players = positions[role];
                 if (players.length > 0) {
                     const shuffled = players.sort(() => Math.random() - 0.5);
