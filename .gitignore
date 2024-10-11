@@ -1,0 +1,26 @@
+# Node.js 관련
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript 관련
+*.tsbuildinfo
+dist/
+
+# 환경 변수 설정 파일
+.env
+
+# 운영 체제 관련
+.DS_Store
+Thumbs.db
+
+# IDE/편집기 관련
+.idea/
+.vscode/
+
+# 로그 파일
+*.log
+
+# Git 관련
+.git/

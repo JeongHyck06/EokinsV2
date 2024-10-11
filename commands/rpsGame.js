@@ -10,7 +10,6 @@ module.exports = {
     async execute(interaction) {
         const choice = interaction.options.getString('선택').toLowerCase();
         const nickname = interaction.member.nickname || interaction.user.username;
-
         if (nickname === teams.team1.captain) {
             rpsResult.team1Move = choice;
         } else if (nickname === teams.team2.captain) {

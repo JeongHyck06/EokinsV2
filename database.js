@@ -13,7 +13,7 @@ async function connectDB() {
         const client = new MongoClient(uri);
         await client.connect();
         console.log('MongoDB에 연결되었습니다.');
-        return client.db('Eokins'); // 사용할 데이터베이스 이름
+        return client.db('Eokins');
     } catch (err) {
         console.error('MongoDB 연결 실패:', err);
     }
