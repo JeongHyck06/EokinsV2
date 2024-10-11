@@ -6,18 +6,15 @@ module.exports = {
     data: new SlashCommandBuilder().setName('초기화').setDescription('참여자 포지션을 모두 초기화합니다.'),
 
     async execute(interaction) {
-        // 잠시 지연을 추가하여 collector가 완전히 종료될 시간을 확보
         await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 지연
 
-        // 모든 포지션 초기화
         Object.keys(positions).forEach((role) => {
             positions[role] = [];
         });
 
-        // 게임 세션 상태를 초기화
         gameStatus.gameSessionActive = false;
+        gameStatus.teamCreationMethod = null;
 
-        // 기존의 활성화된 수집기가 있다면 종료
         if (activeCollector) {
             activeCollector.stop();
         }

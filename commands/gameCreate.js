@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, ComponentType, EmbedBuilder } = require('discord.js');
 const { positions, positionLocks, gameStatus } = require('../state');
 
-let activeCollector = null; // 현재 활성화된 수집기를 저장하는 변수
+let activeCollector = null;
 
 module.exports = {
     data: new SlashCommandBuilder().setName('게임생성').setDescription('참가자 모집 및 포지션 선택'),
@@ -24,15 +24,13 @@ module.exports = {
         const MAX_PLAYERS = 10;
         let playerCount = 0;
 
-        // 기존에 활성화된 수집기가 있다면 종료
         if (activeCollector) {
             activeCollector.stop();
         }
 
-        // 새로 수집기 생성 및 저장
         activeCollector = interaction.channel.createMessageComponentCollector({
             componentType: ComponentType.Button,
-            time: 60000, // 시간이 지나면 자동으로 종료됨
+            time: 60000,
         });
 
         activeCollector.on('collect', async (i) => {
@@ -82,7 +80,7 @@ module.exports = {
             });
 
             gameStatus.gameSessionActive = false;
-            activeCollector = null; // 수집기 종료 후 null로 설정
+            activeCollector = null;
         });
     },
 };

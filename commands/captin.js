@@ -16,11 +16,10 @@ module.exports = {
             return;
         }
 
-        // 해당 팀에 주장 등록
         teams[selectedTeam].captain = nickname;
 
-        // 게임 잠금 설정
         gameStatus.gameLock = true;
+        gameStatus.teamCreationMethod = 'captin';
 
         await interaction.reply({ content: `${nickname}님이 ${selectedTeam} 팀의 주장으로 등록되었습니다. 이제 /게임생성 및 /팀섞기 명령어를 사용할 수 없습니다.` });
     },

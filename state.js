@@ -30,7 +30,6 @@ let teams = {
         players: [],
     },
 };
-
 let positionLocks = {
     top: false,
     mid: false,
@@ -43,12 +42,13 @@ let gameStatus = {
     gameSessionActive: false,
     gameLock: false,
     currentPicker: null,
+    teamCreationMethod: null,
 };
 
 let rpsResult = {
     team1Move: null,
     team2Move: null,
-    winner: null, // 가위바위보의 승자를 저장
+    winner: null,
 };
 
 module.exports = {
