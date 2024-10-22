@@ -29,7 +29,7 @@ for (const file of commandFiles) {
 client.on('guildCreate', async (guild) => {
     console.log(`새로운 서버에 초대되었습니다: ${guild.name}`);
 
-    const iconPath = path.join(__dirname, '아이콘');
+    const iconPath = path.join(__dirname, 'icons');
     const icons = ['top.png', 'mid.png', 'jg.png', 'sup.png', 'ad.png'];
     const emojiNames = ['top', 'mid', 'jg', 'sup', 'ad'];
 
